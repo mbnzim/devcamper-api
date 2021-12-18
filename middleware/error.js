@@ -6,7 +6,7 @@ const errorHandler = (err, req, res, next) => {
 
   //Log to console for dev
   // console.log(err.stack.red);
-  console.log(err);
+  console.log(err.name);
 
   //Mongoose bad ObjectId
   if (err.name === 'CastError') {
@@ -14,15 +14,15 @@ const errorHandler = (err, req, res, next) => {
     error = new ErrorResponse(message, 404);
   }
 
-  //Mongoose validation error
-  if (err.name === 'ValidationError') {
-    const message = Object.values(err.errors).map((val) => val.message);
-    error = new ErrorResponse(message, 400);
-  }
-
   //Mongoose duplicate key
   if (err.code === 11000) {
     const message = 'Duplicate name entered!';
+    error = new ErrorResponse(message, 400);
+  }
+
+  //Mongoose validation error
+  if (err.name === 'ValidationError') {
+    const message = Object.values(err.errors).map((val) => val.message);
     error = new ErrorResponse(message, 400);
   }
 
