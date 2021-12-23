@@ -133,7 +133,7 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
   });
 });
 
-//@desc           Delete bootcaDeletemp
+//@desc           Delete bootcamp
 //@route          DELETE /api/v1/bootcamps/:id
 //@access         Private
 exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
@@ -145,7 +145,7 @@ exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
     );
   }
 
-  bootcamp.remove();
+  await bootcamp.remove();
 
   res.status(200).json({
     success: true,
