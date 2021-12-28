@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
 const colors = require('colors');
 const fileupload = require('express-fileupload');
@@ -27,6 +28,9 @@ if (process.env.NODE_ENV === 'development') {
 
 //Body parser
 app.use(express.json());
+
+//Cookie parser
+app.use(cookieParser());
 
 //File uploading
 app.use(fileupload());
